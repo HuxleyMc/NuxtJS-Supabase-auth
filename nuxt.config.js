@@ -49,5 +49,8 @@ export default {
   },
   serverMiddleware: [
     { path: '/api/rest', handler: '~/server-middleware/rest.js' }
-  ]
+  ],
+  router: {
+    middleware: ['user-auth']
+  }
 };
