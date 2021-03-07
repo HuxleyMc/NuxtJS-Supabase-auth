@@ -14,13 +14,11 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.post('/auth', async (req, res) => {
-  console.log('New auth request');
   await supabase.auth.api.setAuthCookie(req, res);
 });
 
 app.post('/user', async (req, res) => {
   try {
-    console.log('get user request');
     const user = await supabase.auth.api.getUserByCookie(req);
     res.json(user);
   } catch (error) {
