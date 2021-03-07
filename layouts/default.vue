@@ -17,13 +17,13 @@
             <template #button-content>
               <em>Menu</em>
             </template>
-            <b-dropdown-item to="/profile">
+            <b-dropdown-item v-if="isAuthenticated" to="/profile">
               Profile
             </b-dropdown-item>
-            <b-dropdown-item to="/auth">
+            <b-dropdown-item v-if="!isAuthenticated" to="/auth">
               SignIn / SignUp
             </b-dropdown-item>
-            <b-dropdown-item to="/auth?type=signOut">
+            <b-dropdown-item v-if="isAuthenticated" to="/auth?type=signOut">
               Sign Out
             </b-dropdown-item>
           </b-nav-item-dropdown>
@@ -33,6 +33,16 @@
     <Nuxt />
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    isAuthenticated() {
+      return this.$store.state.auth.isAuthenticated;
+    }
+  }
+}
+</script>
 
 <style>
 html {
