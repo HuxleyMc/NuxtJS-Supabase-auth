@@ -8,15 +8,10 @@
 
 <script>
 export default {
-  async asyncData({ $axios, redirect }) {
-    const data = await $axios.$post('/api/rest/user')
-    const { user = null, error = null } = data;
-    if (!user || error) {
-      if (error) { console.error(error) }
-      redirect('/auth')
-    }
-    return {
-      user
+  middleware: ['pageGuard'],
+  computed: {
+    user() {
+      return this.$store.state.auth.user
     }
   }
 }
